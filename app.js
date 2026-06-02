@@ -342,10 +342,226 @@ function saveProduct() {
   saveState();
 }
 
+
+function printInvoice() {
+  renderPreview();
+  const printWindow = window.open('', '_blank', 'width=900,height=1100');
+
+  if (!printWindow) {
+    window.print();
+    return;
+  }
+
+  const invoiceHtml = document.querySelector('#invoicePreview').outerHTML;
+  const title = preview.title.textContent || 'BlumenHaus Rechnung';
+  printWindow.document.write(`<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>${escapeHtml(title)}</title>
+    <style>${standalonePrintStyles()}</style>
+  </head>
+  <body>
+    ${invoiceHtml}
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => window.print(), 120);
+      });
+    <\/script>
+  </body>
+</html>`);
+  printWindow.document.close();
+}
+
+function standalonePrintStyles() {
+  return `
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #1f2924;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.4px;
+      line-height: 1.22;
+    }
+
+    .invoice-page {
+      width: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      box-shadow: none;
+      font: inherit;
+    }
+
+    .invoice-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18mm;
+      min-height: 32mm;
+      margin-bottom: 5mm;
+    }
+
+    .invoice-head h2 {
+      margin: 0 0 2.4mm;
+      font-size: 13px;
+    }
+
+    .invoice-head p,
+    address,
+    p {
+      margin: 0 0 2mm;
+    }
+
+    address {
+      align-self: start;
+      min-height: 0;
+      font-style: normal;
+      white-space: pre-line;
+    }
+
+    .invoice-place-date {
+      margin-bottom: 4mm;
+      text-align: right;
+    }
+
+    .invoice-page h3 {
+      margin: 0 0 4mm;
+      font-size: 14px;
+    }
+
+    .invoice-copy {
+      margin-bottom: 4mm;
+    }
+
+    .invoice-copy p {
+      margin-bottom: 1.8mm;
+    }
+
+    .invoice-table {
+      width: 100%;
+      margin-top: 4mm;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .invoice-table thead {
+      display: table-header-group;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+      padding: 1.45mm 1mm;
+      border-bottom: 1px solid #d3d8d4;
+      text-align: left;
+      vertical-align: top;
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .invoice-table th {
+      font-size: 8.6px;
+      font-weight: 700;
+    }
+
+    .invoice-table th:nth-child(1),
+    .invoice-table td:nth-child(1) {
+      width: 12mm;
+    }
+
+    .invoice-table th:nth-child(2),
+    .invoice-table td:nth-child(2) {
+      width: 12mm;
+    }
+
+    .invoice-table th:nth-child(3),
+    .invoice-table td:nth-child(3) {
+      width: 15mm;
+    }
+
+    .invoice-table th:nth-child(5),
+    .invoice-table td:nth-child(5) {
+      width: 29mm;
+    }
+
+    .invoice-table th:nth-child(6),
+    .invoice-table td:nth-child(6),
+    .invoice-table th:nth-child(7),
+    .invoice-table td:nth-child(7) {
+      width: 21mm;
+    }
+
+    .invoice-table td:nth-child(1),
+    .invoice-table td:nth-child(2),
+    .invoice-table td:nth-child(6),
+    .invoice-table td:nth-child(7) {
+      text-align: right;
+    }
+
+    .invoice-table tr,
+    .totals,
+    .invoice-foot {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .totals {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 3.6mm;
+    }
+
+    .totals dl {
+      width: 58mm;
+      margin: 0;
+    }
+
+    .totals div {
+      display: flex;
+      justify-content: space-between;
+      gap: 8mm;
+      padding: 0.8mm 0;
+    }
+
+    .totals dt {
+      font-weight: 700;
+    }
+
+    .totals dd {
+      margin: 0;
+    }
+
+    .grand-total {
+      border-top: 1px solid #9da8a1;
+      font-size: 11px;
+    }
+
+    .invoice-foot {
+      margin-top: 6mm;
+    }
+
+    .invoice-foot p {
+      margin-bottom: 2.5mm;
+    }
+  `;
+}
+
 function bindEvents() {
   document.querySelector("#addLine").addEventListener("click", addLine);
   document.querySelector("#resetInvoice").addEventListener("click", resetInvoice);
-  document.querySelector("#printInvoice").addEventListener("click", () => window.print());
+  document.querySelector("#printInvoice").addEventListener("click", printInvoice);
   document.querySelector("#saveCustomer").addEventListener("click", saveCustomer);
   document.querySelector("#saveProduct").addEventListener("click", saveProduct);
 
