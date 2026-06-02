@@ -393,14 +393,14 @@ address {
 
 @page {
   size: A4 portrait;
-  margin: 0;
+  margin: 10mm 12mm;
 }
 
 @media print {
   html,
   body {
-    width: 210mm;
-    min-height: 297mm;
+    width: auto;
+    min-height: 0;
     margin: 0;
     background: #fff;
   }
@@ -417,7 +417,7 @@ address {
   .app-shell,
   .preview-wrap {
     display: block;
-    width: 210mm;
+    width: auto;
     max-height: none;
     margin: 0;
     padding: 0;
@@ -425,52 +425,53 @@ address {
   }
 
   .invoice-page {
-    width: 210mm;
-    min-height: 297mm;
+    width: auto;
+    min-height: 0;
     margin: 0;
-    padding: 12mm 14mm 10mm;
+    padding: 0;
     overflow: visible;
     background: #fff;
     box-shadow: none;
-    font-size: 10.2px;
-    line-height: 1.24;
+    font-size: 10.4px;
+    line-height: 1.22;
   }
 
   .invoice-head {
     grid-template-columns: 1fr 1fr;
-    gap: 22mm;
-    min-height: 38mm;
+    gap: 18mm;
+    min-height: 32mm;
+    margin-bottom: 5mm;
   }
 
   .invoice-head h2 {
-    margin-bottom: 3mm;
+    margin-bottom: 2.4mm;
     font-size: 13px;
   }
 
   .invoice-head p,
   address {
-    margin-bottom: 2.8mm;
+    margin-bottom: 2mm;
   }
 
   address {
-    min-height: 24mm;
+    min-height: 0;
   }
 
   .invoice-place-date {
-    margin-bottom: 5mm;
+    margin-bottom: 4mm;
   }
 
   .invoice-page h3 {
-    margin-bottom: 5mm;
+    margin-bottom: 4mm;
     font-size: 14px;
   }
 
   .invoice-copy {
-    margin-bottom: 5mm;
+    margin-bottom: 4mm;
   }
 
   .invoice-copy p {
-    margin-bottom: 2.2mm;
+    margin-bottom: 1.8mm;
   }
 
   .invoice-table {
@@ -484,23 +485,23 @@ address {
 
   .invoice-table th,
   .invoice-table td {
-    padding: 1.6mm 1.1mm;
+    padding: 1.45mm 1mm;
     word-break: normal;
     overflow-wrap: anywhere;
   }
 
   .invoice-table th {
-    font-size: 8.7px;
+    font-size: 8.6px;
   }
 
   .invoice-table th:nth-child(1),
   .invoice-table td:nth-child(1) {
-    width: 13mm;
+    width: 12mm;
   }
 
   .invoice-table th:nth-child(2),
   .invoice-table td:nth-child(2) {
-    width: 13mm;
+    width: 12mm;
   }
 
   .invoice-table th:nth-child(3),
@@ -510,14 +511,14 @@ address {
 
   .invoice-table th:nth-child(5),
   .invoice-table td:nth-child(5) {
-    width: 31mm;
+    width: 29mm;
   }
 
   .invoice-table th:nth-child(6),
   .invoice-table td:nth-child(6),
   .invoice-table th:nth-child(7),
   .invoice-table td:nth-child(7) {
-    width: 22mm;
+    width: 21mm;
   }
 
   .invoice-table tr,
@@ -528,15 +529,15 @@ address {
   }
 
   .totals {
-    margin-top: 4mm;
+    margin-top: 3.6mm;
   }
 
   .totals dl {
-    width: 62mm;
+    width: 58mm;
   }
 
   .totals div {
-    padding: 0.9mm 0;
+    padding: 0.8mm 0;
   }
 
   .grand-total {
@@ -544,10 +545,10 @@ address {
   }
 
   .invoice-foot {
-    margin-top: 8mm;
+    margin-top: 6mm;
   }
 
   .invoice-foot p {
-    margin-bottom: 3mm;
+    margin-bottom: 2.5mm;
   }
 }
