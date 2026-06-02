@@ -391,9 +391,23 @@ address {
   }
 }
 
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
 @media print {
+  html,
   body {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
     background: #fff;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   .workspace {
@@ -403,15 +417,137 @@ address {
   .app-shell,
   .preview-wrap {
     display: block;
-    width: auto;
+    width: 210mm;
     max-height: none;
+    margin: 0;
     padding: 0;
+    overflow: visible;
   }
 
   .invoice-page {
     width: 210mm;
     min-height: 297mm;
-    padding: 20mm 18mm 16mm;
+    margin: 0;
+    padding: 12mm 14mm 10mm;
+    overflow: visible;
+    background: #fff;
     box-shadow: none;
+    font-size: 10.2px;
+    line-height: 1.24;
+  }
+
+  .invoice-head {
+    grid-template-columns: 1fr 1fr;
+    gap: 22mm;
+    min-height: 38mm;
+  }
+
+  .invoice-head h2 {
+    margin-bottom: 3mm;
+    font-size: 13px;
+  }
+
+  .invoice-head p,
+  address {
+    margin-bottom: 2.8mm;
+  }
+
+  address {
+    min-height: 24mm;
+  }
+
+  .invoice-place-date {
+    margin-bottom: 5mm;
+  }
+
+  .invoice-page h3 {
+    margin-bottom: 5mm;
+    font-size: 14px;
+  }
+
+  .invoice-copy {
+    margin-bottom: 5mm;
+  }
+
+  .invoice-copy p {
+    margin-bottom: 2.2mm;
+  }
+
+  .invoice-table {
+    margin-top: 4mm;
+    table-layout: fixed;
+  }
+
+  .invoice-table thead {
+    display: table-header-group;
+  }
+
+  .invoice-table th,
+  .invoice-table td {
+    padding: 1.6mm 1.1mm;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .invoice-table th {
+    font-size: 8.7px;
+  }
+
+  .invoice-table th:nth-child(1),
+  .invoice-table td:nth-child(1) {
+    width: 13mm;
+  }
+
+  .invoice-table th:nth-child(2),
+  .invoice-table td:nth-child(2) {
+    width: 13mm;
+  }
+
+  .invoice-table th:nth-child(3),
+  .invoice-table td:nth-child(3) {
+    width: 15mm;
+  }
+
+  .invoice-table th:nth-child(5),
+  .invoice-table td:nth-child(5) {
+    width: 31mm;
+  }
+
+  .invoice-table th:nth-child(6),
+  .invoice-table td:nth-child(6),
+  .invoice-table th:nth-child(7),
+  .invoice-table td:nth-child(7) {
+    width: 22mm;
+  }
+
+  .invoice-table tr,
+  .totals,
+  .invoice-foot {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .totals {
+    margin-top: 4mm;
+  }
+
+  .totals dl {
+    width: 62mm;
+  }
+
+  .totals div {
+    padding: 0.9mm 0;
+  }
+
+  .grand-total {
+    font-size: 11px;
+  }
+
+  .invoice-foot {
+    margin-top: 8mm;
+  }
+
+  .invoice-foot p {
+    margin-bottom: 3mm;
   }
 }
